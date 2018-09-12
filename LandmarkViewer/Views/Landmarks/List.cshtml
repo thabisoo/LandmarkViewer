@@ -1,0 +1,75 @@
+﻿@model LandmarkViewer.ViewModels.LandmarkViewModel
+@{
+    ViewBag.Title = "List";
+    int counter = 0;
+}
+
+<style>
+    .lm-hover:hover{
+        background-color: #636466;
+        opacity: 0.5;
+        cursor: pointer;
+
+    }
+
+    .lm {
+        padding: 0px;
+        height: 350px;
+        margin-top: 20px;
+    }
+</style>
+
+<h3>Location: Landmarks</h3>
+
+<div class="container">
+    <div class="row">
+        @foreach (var article in Model.Landmarks)
+        {
+            
+            if (counter != 0 && counter % 3 == 0)
+            {
+                @:</div>
+                @:<div class="row">
+            }
+
+            <div class="col-md-4 lm lm-hover" value="@article.Id">
+                <div class="thumbnail">
+                    <img class="img" id="@article.Id" src="@article.MediumImageUrl" data-holder-rendered="true" style="height: 250px; width: 100%; display: block;">
+                    <div class="caption">
+                        <h3 id="thumbnail-label">@article.Title</h3>
+                        <p>@article.Description</p>
+                    </div>
+                </div>
+            </div>
+
+            counter++;
+        }
+    </div>
+
+</div>
+
+<script>
+
+    this.getLandmarkDetails = function (id) {
+        var data = {
+            Id: id,
+        }
+
+        $.ajax({
+            cache: false,
+            async: true,
+            type: 'GET',
+            data: data,
+            success: function (results) {
+                location.href = '/Landmarks/GetLandmarkDetails/' + id;
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $(".img").on('click', function () {
+            getLandmarkDetails(($(this).attr('id')));
+        });
+    });
+</script>
+

@@ -1,0 +1,86 @@
+﻿@model LandmarkViewer.ViewModels.LocationViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    .d-none{
+        display:none
+    }
+</style>
+
+<div class="container" style="padding: 15% 25%">
+    <img src="~/Content/lv.png" />
+    <br />
+
+    @using (Html.BeginForm("Create", "Landmarks"))
+    {
+        <div style="width: 450px;">
+            <div id="locationSearch">
+                @Html.TextBoxFor(m => m.Location, new { @class = "form-control pull-left", @placeholder = "Enter Location" })
+
+                <div class="dropdown">
+                    <button data-toggle="dropdown" class="btn btn-sm btn-info pull-left"><i class="fa fa-caret-down" style="font-size: 14px;"></i></button>
+
+                    <ul id="btn_lat_long_Search" class="dropdown-menu pull-left" style="margin-left: 30%; margin-top: 7%; cursor: pointer">
+                        <li>Search using Lat/Lon</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn btn-sm btn-success pull-left" style="padding: 5px 15px; margin-left: 50px;">
+                    <i class="fa fa-share-square" style="font-size: 14px;"></i>Send
+                </button>
+            </div>
+
+            <div id="lat_long_Search" class="d-none">
+
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Latitude, new { @class = "form-control pull-left", @placeholder = "Enter Latitude" })
+                </div>
+                <br/>
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Logitude, new { @class = "form-control pull-left", @placeholder = "Enter Longitude" })
+
+                    <div class="dropdown">
+                        <button data-toggle="dropdown" class="btn btn-sm btn-info pull-left"><i class="fa fa-caret-down" style="font-size: 14px;"></i></button>
+
+                        <ul id="btn_locationSearch" class="dropdown-menu pull-left" style="margin-left: 25%; margin-top: 5%; cursor: pointer">
+                            <li>Search using Location</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-sm btn-success pull-left" style="padding: 5px 15px; margin-left: 50px;">
+                    <i class="fa fa-share-square" style="font-size: 14px;"></i>Send
+                </button>
+            </div>
+        </div>
+    }
+    
+</div>
+
+<script>
+
+    this.lat_long_Search = function () {
+        $("#locationSearch").addClass("d-none");
+        $("#lat_long_Search").removeClass("d-none");
+        
+    }
+
+    this.locationSearch = function () {
+        $("#lat_long_Search").addClass("d-none");
+        $("#locationSearch").removeClass("d-none");
+
+    }
+
+    $(document).ready(function () {
+
+        $("#btn_lat_long_Search").on('click', function () {
+            lat_long_Search();
+        });
+
+        $("#btn_locationSearch").on('click', function () {
+            locationSearch();
+        });
+    });
+</script>

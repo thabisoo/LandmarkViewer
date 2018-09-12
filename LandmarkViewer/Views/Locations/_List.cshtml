@@ -1,0 +1,13 @@
+﻿@model LandmarkViewer.ViewModels.LocationViewModel
+@{
+    ViewBag.Title = "_List";
+}
+
+<h2>Locations List</h2>
+
+@foreach(var l in Model.Locations)
+{
+    <ul>
+        <li>@l.Name</li>
+    </ul>
+}

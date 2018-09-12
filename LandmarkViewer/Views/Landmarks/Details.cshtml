@@ -1,0 +1,13 @@
+﻿@model LandmarkViewer.ViewModels.LandmarkViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    <img src="@Model.Path"/>
+    <h3>@Model.Title</h3>
+    <p>@Model.Description</p>
+</div>
+
